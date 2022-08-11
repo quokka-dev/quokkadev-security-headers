@@ -28,6 +28,7 @@ namespace QuokkaDev.SecurityHeaders
         /// <param name="builder">The configuring application builder</param>
         /// <param name="config">Application IConfiguration</param>
         /// <param name="sectionName">The name of the configuration section where settings are read. Default is "SecurityHeaders"</param>
+        /// <param name="configureSettingsDelegate">A delegate for settings configuration</param>
         /// <returns>The configuring application builder for chaining methods</returns>
         public static IApplicationBuilder UseSecurityHeaders(this IApplicationBuilder builder, IConfiguration config, string sectionName = "SecurityHeaders", Action<SecurityHeadersConfigurationSettings>? configureSettingsDelegate = null)
         {
