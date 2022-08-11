@@ -28,10 +28,14 @@ namespace QuokkaDev.SecurityHeaders
         /// <param name="builder">The configuring application builder</param>
         /// <param name="config">Application IConfiguration</param>
         /// <param name="sectionName">The name of the configuration section where settings are read. Default is "SecurityHeaders"</param>
+        /// <param name="configureSettingsDelegate">A delegate for settings configuration</param>
         /// <returns>The configuring application builder for chaining methods</returns>
-        public static IApplicationBuilder UseSecurityHeaders(this IApplicationBuilder builder, IConfiguration config, string sectionName = "SecurityHeaders")
+        public static IApplicationBuilder UseSecurityHeaders(this IApplicationBuilder builder, IConfiguration config, string sectionName = "SecurityHeaders", Action<SecurityHeadersConfigurationSettings>? configureSettingsDelegate = null)
         {
             var settings = GetSettingsFromConfiguration(config, sectionName);
+
+            configureSettingsDelegate?.Invoke(settings);
+
             return builder.UseMiddleware<SecurityHeadersMiddleware>(settings);
         }
 
@@ -45,7 +49,7 @@ namespace QuokkaDev.SecurityHeaders
             configureSettingsDelegate ??= ((SecurityHeadersConfigurationSettings _) => { });
             var settings = GetDefaultSettings();
 
-            configureSettingsDelegate?.Invoke(settings);
+            configureSettingsDelegate.Invoke(settings);
 
             return settings;
         }
@@ -60,9 +64,22 @@ namespace QuokkaDev.SecurityHeaders
         {
             var settings = GetDefaultSettings();
             config.Bind(sectionName, settings);
-            settings.ContentSecurityPolicy = ContentSecurityPolicyBuilder.New().ReadFromConfig(config, $"{sectionName}:ContentSecurityPolicy").Build();
-            settings.PermissionPolicy = PermissionPolicyBuilder.New().ReadFromConfig(config, $"{sectionName}:PermissionPolicy").Build();
-            settings.ClearSiteData = ClearSitedata.ClearSiteData.ReadFromConfig(config, $"{sectionName}:ClearSiteData") ?? settings.ClearSiteData;
+
+            if (config.GetSection($"{sectionName}:ContentSecurityPolicy").Exists())
+            {
+                settings.ContentSecurityPolicy = ContentSecurityPolicyBuilder.New().ReadFromConfig(config, $"{sectionName}:ContentSecurityPolicy").Build();
+            }
+
+            if (config.GetSection($"{sectionName}:PermissionPolicy").Exists())
+            {
+                settings.PermissionPolicy = PermissionPolicyBuilder.New().ReadFromConfig(config, $"{sectionName}:PermissionPolicy").Build();
+            }
+
+            if (config.GetSection($"{sectionName}:ClearSiteData").Exists())
+            {
+                settings.ClearSiteData = ClearSitedata.ClearSiteData.ReadFromConfig(config, $"{sectionName}:ClearSiteData") ?? settings.ClearSiteData;
+            }
+
             return settings;
         }
 
