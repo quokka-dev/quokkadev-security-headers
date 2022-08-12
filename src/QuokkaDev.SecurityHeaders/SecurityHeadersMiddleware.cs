@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using QuokkaDev.SecurityHeaders.Csp;
 
 namespace QuokkaDev.SecurityHeaders
 {
@@ -60,7 +61,13 @@ namespace QuokkaDev.SecurityHeaders
         {
             if (settings.UseContentSecurityPolicy && settings.ContentSecurityPolicy != null)
             {
-                httpContext.Response.Headers.TryAdd(Constants.Headers.CONTENT_SECURITY_POLICY, settings.ContentSecurityPolicy.GetPolicyString());
+                var service = httpContext.RequestServices.GetService(typeof(NonceService));
+                string contentSecuritypolicyString = settings.ContentSecurityPolicy.GetPolicyString();
+                if (service is NonceService nonceService)
+                {
+                    contentSecuritypolicyString = contentSecuritypolicyString.Replace("'nonce'", $"'nonce-{nonceService.RequestNonce}'");
+                }
+                httpContext.Response.Headers.TryAdd(Constants.Headers.CONTENT_SECURITY_POLICY, contentSecuritypolicyString);
             }
         }
 
