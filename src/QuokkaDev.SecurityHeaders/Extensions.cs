@@ -15,12 +15,17 @@ namespace QuokkaDev.SecurityHeaders
             var service = accessor.HttpContext.RequestServices.GetService(typeof(NonceService));
             if (service is NonceService nonceService)
             {
-                return $"nonce=\"{nonceService.RequestNonce}\"";
+                return nonceService.RequestNonce;
             }
             else
             {
                 throw new InvalidOperationException("NonceService is not configured");
             }
+        }
+
+        public static string GetNonce(this IHttpContextAccessor accessor)
+        {
+            return $"nonce=\"{GetNonceAttribute(accessor)}\"";
         }
     }
 }
