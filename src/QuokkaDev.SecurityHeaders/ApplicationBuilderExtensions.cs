@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using QuokkaDev.SecurityHeaders.Csp;
 using QuokkaDev.SecurityHeaders.PermissionPolicy;
 
@@ -10,6 +11,13 @@ namespace QuokkaDev.SecurityHeaders
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
+
+        public static IServiceCollection AddNonceService(this IServiceCollection services)
+        {
+            services.AddScoped<NonceService>();
+            return services;
+        }
+
         /// <summary>
         /// Add SecurityHeadersMiddleware to the application pipeline
         /// </summary>
