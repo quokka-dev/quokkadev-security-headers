@@ -10,7 +10,7 @@ namespace QuokkaDev.SecurityHeaders
             return o?.ToString()?.Replace('_', '-');
         }
 
-        public static string GetNonceAttribute(this IHttpContextAccessor accessor)
+        public static string GetNonce(this IHttpContextAccessor accessor)
         {
             var service = accessor.HttpContext.RequestServices.GetService(typeof(NonceService));
             if (service is NonceService nonceService)
@@ -23,9 +23,9 @@ namespace QuokkaDev.SecurityHeaders
             }
         }
 
-        public static string GetNonce(this IHttpContextAccessor accessor)
+        public static string GetNonceAttribute(this IHttpContextAccessor accessor)
         {
-            return $"nonce=\"{GetNonceAttribute(accessor)}\"";
+            return $"nonce=\"{GetNonce(accessor)}\"";
         }
     }
 }
