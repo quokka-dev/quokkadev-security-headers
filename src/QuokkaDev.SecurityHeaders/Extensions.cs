@@ -3,7 +3,7 @@ using QuokkaDev.SecurityHeaders.Csp;
 
 namespace QuokkaDev.SecurityHeaders
 {
-    internal static class Extensions
+    public static class Extensions
     {
         internal static string? DashReplace(this object o)
         {
