@@ -30,6 +30,11 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
             return AddSource("self");
         }
 
+        public Directive Nonce()
+        {
+            return AddSource("'nonce'");
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new($"{Name}=(");
