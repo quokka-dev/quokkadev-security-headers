@@ -12,8 +12,8 @@ namespace QuokkaDev.SecurityHeaders
 
         public static string GetNonce(this IHttpContextAccessor accessor)
         {
-            var service = accessor.HttpContext.RequestServices.GetService(typeof(NonceService));
-            if (service is NonceService nonceService)
+            var service = accessor.HttpContext.RequestServices.GetService(typeof(INonceService));
+            if (service is INonceService nonceService)
             {
                 return nonceService.RequestNonce;
             }

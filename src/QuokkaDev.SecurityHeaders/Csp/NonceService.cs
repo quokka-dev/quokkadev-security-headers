@@ -2,9 +2,8 @@
 
 namespace QuokkaDev.SecurityHeaders.Csp
 {
-    internal class NonceService
+    internal class NonceService : INonceService
     {
-
         public string RequestNonce { get; }
 
         public NonceService()

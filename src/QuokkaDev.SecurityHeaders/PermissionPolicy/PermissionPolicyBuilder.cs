@@ -2,7 +2,7 @@
 
 namespace QuokkaDev.SecurityHeaders.PermissionPolicy
 {
-    public class PermissionPolicyBuilder
+    public sealed class PermissionPolicyBuilder
     {
         private readonly PermissionPolicy policy;
 
@@ -44,7 +44,7 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
         {
             return AddDirective(name, p =>
             {
-                allowedSources = allowedSources ?? new List<string>();
+                allowedSources ??= new List<string>();
                 if (allowedSources != null)
                 {
                     foreach (string source in allowedSources)

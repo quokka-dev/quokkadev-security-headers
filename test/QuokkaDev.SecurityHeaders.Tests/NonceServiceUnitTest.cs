@@ -14,10 +14,9 @@ namespace QuokkaDev.SecurityHeaders.Tests
         public void Nonce_Should_Be_Unique()
         {
             // Arrange
-            NonceService n1 = new NonceService();
-            NonceService n2 = new NonceService();
+            NonceService n1 = new();
+            NonceService n2 = new();
             // Act
-
 
             // Assert
             n1.RequestNonce.Should().NotBe(n2.RequestNonce);

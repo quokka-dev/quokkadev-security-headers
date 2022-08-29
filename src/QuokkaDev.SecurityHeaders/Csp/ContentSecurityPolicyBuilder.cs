@@ -2,7 +2,7 @@
 
 namespace QuokkaDev.SecurityHeaders.Csp
 {
-    public class ContentSecurityPolicyBuilder
+    public sealed class ContentSecurityPolicyBuilder
     {
         private readonly ContentSecurityPolicy policy;
 
