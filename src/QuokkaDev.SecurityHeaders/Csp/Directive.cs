@@ -43,6 +43,11 @@ namespace QuokkaDev.SecurityHeaders.Csp
             return AddSource("'unsafe-eval'");
         }
 
+        public Directive Nonce()
+        {
+            return AddSource("'nonce'");
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new($"{Name} ");

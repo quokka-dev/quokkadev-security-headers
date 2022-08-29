@@ -14,7 +14,7 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
 
         public Directive AddSource(string source)
         {
-            if (source == "self" || source == "")
+            if (source == "self" || source.Length == 0)
             {
                 this.AllowedSources?.Add(source);
             }
@@ -28,11 +28,6 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
         public Directive Self()
         {
             return AddSource("self");
-        }
-
-        public Directive Nonce()
-        {
-            return AddSource("'nonce'");
         }
 
         public override string ToString()

@@ -107,5 +107,37 @@ namespace QuokkaDev.SecurityHeaders.Tests
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, It.IsAny<StringValues>()), Times.Never);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.PERMISSION_POLICY, It.IsAny<StringValues>()), Times.Never);
         }
+
+        [Fact(DisplayName = "Nonce service should be called")]
+        public async Task Nonce_Service_Should_Be_Called()
+        {
+            // Arrange
+            var delegateMock = new Mock<RequestDelegate>();
+            delegateMock.Setup(m => m.Invoke(It.IsAny<HttpContext>())).Returns(Task.CompletedTask);
+
+            var settings = new SecurityHeadersConfigurationSettings()
+            {
+                UseContentSecurityPolicy = true,
+                ContentSecurityPolicy = ContentSecurityPolicyBuilder.New()
+                    .AddDefaultSrc(d => d.Nonce())
+                    .Build()
+            };
+
+            var context = new HttpContextMock();
+            IHeaderDictionary headerDictionary = new HeaderDictionary();
+            context.ResponseMock.Mock.Setup(r => r.Headers).Returns(headerDictionary);
+
+            var ns = new Mock<INonceService>();
+            ns.Setup(s => s.RequestNonce).Returns("mock-nonce");
+            context.RequestServicesMock.Mock.Setup(rs => rs.GetService(typeof(INonceService))).Returns(ns.Object);
+            SecurityHeadersMiddleware middleware = new(delegateMock.Object, settings, null);
+
+            // Act
+            await middleware.InvokeAsync(context);
+
+            // Assert            
+            context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Once);
+            ns.Verify(s => s.RequestNonce, Times.Once);
+        }
     }
 }

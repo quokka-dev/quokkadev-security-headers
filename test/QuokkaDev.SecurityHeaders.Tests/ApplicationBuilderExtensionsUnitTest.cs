@@ -1,6 +1,8 @@
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using QuokkaDev.SecurityHeaders.ClearSitedata;
+using QuokkaDev.SecurityHeaders.Csp;
 using System.Collections.Generic;
 using Xunit;
 
@@ -120,5 +122,19 @@ public class ApplicationBuilderExtensionsUnitTest
         settings.CrossOriginEmbedderPolicy.Should().Be(CrossOriginEmbedderPolicy.require_corp, "CrossOriginEmbedderPolicy default value should be used");
         settings.CrossOriginOpenerPolicy.Should().Be(CrossOriginOpenerPolicy.same_origin, "CrossOriginOpenerPolicy default value should be used");
         settings.CrossOriginResourcePolicy.Should().Be(CrossOriginResourcePolicy.same_origin, "CrossOriginResourcePolicy default value should be used");
+    }
+
+    [Fact(DisplayName = "AddNonceService_Register_Service")]
+    public void AddNonceService_Register_Service()
+    {
+        // Arrange
+        IServiceCollection services = new ServiceCollection();
+
+        // Act        
+        services.AddNonceService();
+        var registeredService = services.BuildServiceProvider().GetService<INonceService>();
+
+        // Assert            
+        registeredService.Should().NotBeNull();
     }
 }

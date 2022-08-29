@@ -61,9 +61,9 @@ namespace QuokkaDev.SecurityHeaders
         {
             if (settings.UseContentSecurityPolicy && settings.ContentSecurityPolicy != null)
             {
-                var service = httpContext.RequestServices.GetService(typeof(NonceService));
+                var service = httpContext.RequestServices.GetService(typeof(INonceService));
                 string contentSecuritypolicyString = settings.ContentSecurityPolicy.GetPolicyString();
-                if (service is NonceService nonceService)
+                if (service is INonceService nonceService)
                 {
                     contentSecuritypolicyString = contentSecuritypolicyString.Replace("'nonce'", $"'nonce-{nonceService.RequestNonce}'");
                 }

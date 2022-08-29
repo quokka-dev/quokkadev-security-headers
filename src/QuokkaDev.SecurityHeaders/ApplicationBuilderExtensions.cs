@@ -11,10 +11,14 @@ namespace QuokkaDev.SecurityHeaders
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
-
+        /// <summary>
+        /// Add nonce service for Content Security Policy evaluation
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddNonceService(this IServiceCollection services)
         {
-            services.AddScoped<NonceService>();
+            services.AddScoped<INonceService, NonceService>();
             return services;
         }
 

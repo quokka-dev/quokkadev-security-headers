@@ -26,7 +26,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
         public void CSP_Read_From_Config_Should_Match_Expected_String()
         {
             // Arrange
-            ConfigurationBuilder builder = new ConfigurationBuilder();
+            ConfigurationBuilder builder = new();
             var configuration = builder.AddJsonFile("appsettings.json").Build();
 
             var settings = ApplicationBuilderExtensions.GetSettingsFromConfiguration(configuration, "SecurityHeaders");
