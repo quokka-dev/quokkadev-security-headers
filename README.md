@@ -240,6 +240,7 @@ The default value for the header is
 ```csharp
 app.UseSecurityHeaders(settings =>
 {
+    settings.UseClearSiteData = true;
     settings.ClearSiteData = new ClearSitedata.ClearSiteData()
         .ClearCache()
         .ClearCookies()
@@ -249,7 +250,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
+    "SecurityHeaders": {
+        "UseClearSiteData": true, //set to false for disable header 
         "ClearSiteData": [ "cache", "cookies" , "storage"]      
     }
 }

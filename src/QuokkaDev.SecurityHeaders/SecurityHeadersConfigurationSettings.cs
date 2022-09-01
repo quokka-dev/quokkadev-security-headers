@@ -19,5 +19,6 @@ namespace QuokkaDev.SecurityHeaders
         public CrossOriginResourcePolicy CrossOriginResourcePolicy { get; set; }
         public bool UsePermissionPolicy { get; set; }
         public PermissionPolicy.PermissionPolicy? PermissionPolicy { get; set; }
+        public bool UseClearSiteData { get; set; }
     }
 }
