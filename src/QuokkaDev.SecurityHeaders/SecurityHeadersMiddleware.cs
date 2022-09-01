@@ -97,7 +97,7 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddClearSiteData(HttpContext httpContext)
         {
-            if (settings.ClearSiteData != null)
+            if (settings.ClearSiteData != null && settings.UseClearSiteData)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CLEAR_SITE_DATA, settings.ClearSiteData.ToString());
             }
