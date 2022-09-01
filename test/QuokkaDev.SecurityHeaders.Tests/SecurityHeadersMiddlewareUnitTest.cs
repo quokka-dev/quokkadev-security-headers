@@ -28,6 +28,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
                 XContentTypeOptions = XContentTypeOptions.nosniff,
                 UseContentSecurityPolicy = true,
                 UsePermissionPolicy = true,
+                UseClearSiteData = true,
                 XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.none,
                 ReferrerPolicy = ReferrerPolicy.no_referrer,
                 CrossOriginEmbedderPolicy = CrossOriginEmbedderPolicy.require_corp,
