@@ -4,7 +4,7 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
 {
     public class Directive
     {
-        public HashSet<string> AllowedSources { get; set; }
+        public HashSet<string> AllowedSources { get; private set; }
         public string? Name { get; set; }
 
         public Directive()
@@ -16,11 +16,11 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
         {
             if (source == "self" || source.Length == 0)
             {
-                this.AllowedSources?.Add(source);
+                this.AllowedSources.Add(source);
             }
             else
             {
-                this.AllowedSources?.Add($"\"{source}\"");
+                this.AllowedSources.Add($"\"{source}\"");
             }
             return this;
         }
@@ -40,9 +40,8 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
                     sb.Append(source).Append(' ');
                 }
                 sb.Remove(sb.Length - 1, 1);
-                sb.Append(')');
-                return sb.ToString();
             }
+            sb.Append(')');
             return sb.ToString().Trim();
         }
     }
