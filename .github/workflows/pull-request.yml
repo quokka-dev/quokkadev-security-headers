@@ -116,7 +116,7 @@ jobs:
             {"summary":"Code Coverage"}
           output_text_description_file: code-coverage-results.md
 
-      # Build
+      # Build and analyze
 
       - name: Build and analyze
         env:
