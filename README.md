@@ -1,7 +1,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=coverage)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) ![publish workflow](https://github.com/quokka-dev/quokkadev-security-headers/actions/workflows/publish.yml/badge.svg) 
 
 # QuokkaDev.SecurityHeaders
-QuokkaDev.SecurityHeaders is a .NET middleware for adding OWASP security headers to your web applications
+QuokkaDev.SecurityHeaders is a .NET middleware for adding OWASP security headers to your web applications. You can use online tools like [https://securityheaders.com](https://securityheaders.com) to check the status of your application against security headers.
 
 ## Installing QuokkaDev.SecurityHeaders
 
@@ -72,7 +72,7 @@ app.UseSecurityHeaders(this.Configuration, "CustomSectionName", settings =>
 
 ## Available headers 
 
-### X-Frame-Options
+### [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
 
 Admitted values:
 -   none (don't use header)
@@ -94,7 +94,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### X-Content-Type-Options
+### [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
 Admitted values:
 -   none (don't use header)
 -   nosniff (default value)
@@ -114,7 +114,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### X-Permitted-Cross-Domain-Policies
+### [X-Permitted-Cross-Domain-Policies](https://docs.fluidattacks.com/criteria/vulnerabilities/137/)
 Admitted values:
 -   no_header (don't use header)
 -   none (default value)
@@ -138,7 +138,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Referrer-Policy
+### [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
 Admitted values:
 -   none (don't use header)
 -   no_referrer (default value)
@@ -166,7 +166,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Cross-Origin-Embedder-Policy
+### [Cross-Origin-Embedder-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)
 Admitted values:
 -   none (don't use header)
 -   unsafe_none
@@ -187,7 +187,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Cross-Origin-Opener-Policy
+### [Cross-Origin-Opener-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)
 Admitted values:
 -   none (don't use header)
 -   unsafe_none
@@ -209,7 +209,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Cross-Origin-Resource-Policy
+### [Cross-Origin-Resource-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)
 Admitted values:
 -   none (don't use header)
 -   same_site
@@ -231,7 +231,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Clear-Site-Data
+### [Clear-Site-Data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Clear-Site-Data)
 You can configure Clear-Site-Data passing a configured ClearSitedata object. You can clear site data for **cache**, **storage** and **cookies**.
 The default value for the header is 
 
@@ -257,7 +257,7 @@ app.UseSecurityHeaders(settings =>
 }
 ```
 
-### Content-Security-Policy
+### [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
 You can configure Content-Security-Policy passing a configured ContentSecurityPolicy object. You can configure the object using configuration, using a "ready-to-use" string or using a `ContentSecurityPolicyBuilder` with fluent API.
 The default value for the header is:
 
@@ -366,7 +366,7 @@ namespace MyProject.Web.TagHelpers
 </script>
 ```
 
-### Permissions-Policy
+### [Permissions-Policy](https://w3c.github.io/webappsec-permissions-policy)
 You can configure Permissions-Policy passing a configured PermissionPolicy object. You can configure the object using configuration, using a "ready-to-use" string or using a `PermissionPolicyBuilder` with fluent API.
 The default value for the header is:
 
