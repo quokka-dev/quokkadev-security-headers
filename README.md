@@ -17,7 +17,7 @@ Please note that the middleware apply some default values for headers; if you do
 #### **`startup.cs`**
 ```csharp
 
-//Use headers with default values
+//Use headers with default values.
 app.UseSecurityHeaders();
 
 //Configure headers programmatically
