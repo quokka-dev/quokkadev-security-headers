@@ -28,12 +28,12 @@ namespace QuokkaDev.SecurityHeaders.Csp
 
         public ContentSecurityPolicyBuilder ReadFromConfig(IConfiguration config, string sectionName)
         {
-            var keys = config?.GetSection(sectionName)?.GetChildren();
+            var keys = config.GetSection(sectionName).GetChildren();
             if (keys != null)
             {
                 foreach (string key in keys.Select(k => k.Key))
                 {
-                    var allowedSources = config?.GetSection(sectionName).GetSection(key).Get<string[]>().ToList();
+                    var allowedSources = config.GetSection(sectionName).GetSection(key).Get<string[]>().ToList();
                     AddDirective(key, allowedSources);
                 }
             }
