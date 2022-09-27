@@ -4,7 +4,7 @@ namespace QuokkaDev.SecurityHeaders.Csp
 {
     public class Directive
     {
-        public HashSet<string> AllowedSources { get; set; }
+        public HashSet<string> AllowedSources { get; private set; }
         public string? Name { get; set; }
 
         public Directive()
@@ -14,7 +14,7 @@ namespace QuokkaDev.SecurityHeaders.Csp
 
         public Directive AddSource(string source)
         {
-            this.AllowedSources?.Add(source);
+            this.AllowedSources.Add(source);
             return this;
         }
 
