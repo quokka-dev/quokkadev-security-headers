@@ -1,4 +1,4 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=coverage)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) ![publish workflow](https://github.com/quokka-dev/quokkadev-security-headers/actions/workflows/publish.yml/badge.svg) 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=coverage)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=quokka-dev_quokkadev-security-headers&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=quokka-dev_quokkadev-security-headers) ![publish workflow](https://github.com/quokka-dev/quokkadev-security-headers/actions/workflows/publish.yml/badge.svg)
 
 # QuokkaDev.SecurityHeaders
 QuokkaDev.SecurityHeaders is a .NET middleware for adding OWASP security headers to your web applications. You can use online tools like [https://securityheaders.com](https://securityheaders.com) to check the status of your application against security headers.
@@ -70,7 +70,7 @@ app.UseSecurityHeaders(this.Configuration, "CustomSectionName", settings =>
 });
 ```
 
-## Available headers 
+## Available headers
 
 ### [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
 
@@ -88,8 +88,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "XFrameOption": "sameorigin"   
+    "SecurityHeaders": {
+        "XFrameOption": "sameorigin"
     }
 }
 ```
@@ -108,8 +108,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "XContentTypeOptions": "nosniff"      
+    "SecurityHeaders": {
+        "XContentTypeOptions": "nosniff"
     }
 }
 ```
@@ -132,8 +132,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "XPermittedCrossDomainPolicies": "none"      
+    "SecurityHeaders": {
+        "XPermittedCrossDomainPolicies": "none"
     }
 }
 ```
@@ -160,8 +160,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "ReferrerPolicy": "no_referrer"      
+    "SecurityHeaders": {
+        "ReferrerPolicy": "no_referrer"
     }
 }
 ```
@@ -181,8 +181,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "CrossOriginEmbedderPolicy": "require_corp"      
+    "SecurityHeaders": {
+        "CrossOriginEmbedderPolicy": "require_corp"
     }
 }
 ```
@@ -203,8 +203,8 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "CrossOriginOpenerPolicy": "same_origin"      
+    "SecurityHeaders": {
+        "CrossOriginOpenerPolicy": "same_origin"
     }
 }
 ```
@@ -225,15 +225,15 @@ app.UseSecurityHeaders(settings =>
 
 ```json
 {
-    "SecurityHeaders": { 
-        "CrossOriginResourcePolicy": "same_origin"      
+    "SecurityHeaders": {
+        "CrossOriginResourcePolicy": "same_origin"
     }
 }
 ```
 
 ### [Clear-Site-Data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Clear-Site-Data)
 You can configure Clear-Site-Data passing a configured ClearSitedata object. You can clear site data for **cache**, **storage** and **cookies**.
-The default value for the header is 
+The default value for the header is
 
     Clear-Site-Data: "cache", "cookies", "storage"
 
@@ -251,8 +251,8 @@ app.UseSecurityHeaders(settings =>
 ```json
 {
     "SecurityHeaders": {
-        "UseClearSiteData": true, //set to false for disable header 
-        "ClearSiteData": [ "cache", "cookies" , "storage"]      
+        "UseClearSiteData": true, //set to false for disable header
+        "ClearSiteData": [ "cache", "cookies" , "storage"]
     }
 }
 ```
@@ -288,14 +288,14 @@ app.UseSecurityHeaders(settings =>
 //Disable CSP header
 app.UseSecurityHeaders(settings =>
 {
-    settings.UseContentSecurityPolicy = false;                
+    settings.UseContentSecurityPolicy = false;
 });
 ```
 If both a string and fluent API are used with `ContentSecurityPolicyBuilder` the string take the precedence
 
 ```json
 {
-    "SecurityHeaders": { 
+    "SecurityHeaders": {
         "UseContentSecurityPolicy": true //set to false for disable header
         "ContentSecurityPolicy": {
             "default-src": [ "'self'" ],
@@ -310,13 +310,31 @@ If both a string and fluent API are used with `ContentSecurityPolicyBuilder` the
             "script-src-elem": [ "'self'", "'nonce'" ],
             "connect-src": [ "'self'" ],
             "prefetch-src": [ "'self'", "https://fonts.googleapis.com", "'nonce'" ]
-        }     
+        }
     }
 }
 ```
 Configure a directive calling the right method on the builder then adding all the allowed sources with `AddSource()`. Some utility methods like `All(), None(), Self(), UnsafeInline(), UnsafeEval()` can be used for standard values
 
 If a directive take no extra values (like *block-all-mixed-content*) pass an array with an empty string in configuration file.
+
+#### Ignore Urls
+In some cases it can be useful disable the Content Security Policy for some URLs in your application. For example, if you use  NuGet package it serve an index.html page with inline styles and scripts. You can bypass the problem using 'unsafe-inline' as a CSP value for styles and script but this makes the whole application much more insecure. You can disable CSP for the swagger endpoint using the property `ContentSecurityPolicyIgnoreUrls` and passing an array of path to ignore:
+
+```csharp
+app.UseSecurityHeaders(settings =>
+{
+    settings.ContentSecurityPolicyIgnoreUrls = new string[] { "/swagger/index.html" };
+});
+```
+
+```json
+{
+    "SecurityHeaders": {
+        "ContentSecurityPolicyIgnoreUrls": [ "/swagger/index.html" ]
+    }
+}
+```
 
 #### Nonce
 If you need to use *nonce* for inline script and styles call `AddSource("'nonce'")` in fluent API or use the string `"'nonce'"` in configuration file.
@@ -366,6 +384,7 @@ namespace MyProject.Web.TagHelpers
 </script>
 ```
 
+
 ### [Permissions-Policy](https://w3c.github.io/webappsec-permissions-policy)
 You can configure Permissions-Policy passing a configured PermissionPolicy object. You can configure the object using configuration, using a "ready-to-use" string or using a `PermissionPolicyBuilder` with fluent API.
 The default value for the header is:
@@ -395,20 +414,20 @@ app.UseSecurityHeaders(settings =>
 //Disable permissions policy header
 app.UseSecurityHeaders(settings =>
 {
-    settings.UsePermissionPolicy = false;                
+    settings.UsePermissionPolicy = false;
 });
 ```
 If both a string and fluent API are used with `PermissionsPolicyBuilder` the string take the precedence
 
 ```json
 {
-    "SecurityHeaders": { 
+    "SecurityHeaders": {
         "UsePermissionPolicy": true //set to false for disable header
         "PermissionPolicy": {
             "accelerometer": [""],
             "camera": [ "self" ],
             "display-capture": ["self", "https://mydomain"]
-        }     
+        }
     }
 }
 ```
