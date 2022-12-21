@@ -20,5 +20,6 @@ namespace QuokkaDev.SecurityHeaders
         public bool UsePermissionPolicy { get; set; }
         public PermissionPolicy.PermissionPolicy? PermissionPolicy { get; set; }
         public bool UseClearSiteData { get; set; }
+        public string[]? ContentSecurityPolicyIgnoreUrls { get; set; }
     }
 }

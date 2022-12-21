@@ -59,6 +59,11 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddContentSecurityPolicy(HttpContext httpContext)
         {
+            if (settings.ContentSecurityPolicyIgnoreUrls?.Length > 0 &&
+                settings.ContentSecurityPolicyIgnoreUrls.Any(url => GetSafePath(httpContext).Contains(url, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return;
+            }
             if (settings.UseContentSecurityPolicy && settings.ContentSecurityPolicy != null)
             {
                 var service = httpContext.RequestServices.GetService(typeof(INonceService));
@@ -125,6 +130,11 @@ namespace QuokkaDev.SecurityHeaders
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, settings.CrossOriginResourcePolicy.DashReplace());
             }
+        }
+
+        private string GetSafePath(HttpContext httpContext)
+        {
+            return "" + httpContext.Request.Path.Value;
         }
     }
 }
