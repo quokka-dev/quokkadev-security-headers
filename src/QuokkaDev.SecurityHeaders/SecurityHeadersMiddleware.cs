@@ -142,7 +142,7 @@ namespace QuokkaDev.SecurityHeaders
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 
-        private string GetSafePath(HttpContext httpContext)
+        private static string GetSafePath(HttpContext httpContext)
         {
             return "" + httpContext.Request.Path.Value;
         }
