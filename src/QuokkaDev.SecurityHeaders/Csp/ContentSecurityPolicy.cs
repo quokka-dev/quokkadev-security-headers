@@ -30,7 +30,7 @@ namespace QuokkaDev.SecurityHeaders.Csp
         {
             if (policyString is null)
             {
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new();
                 foreach (var directive in directives)
                 {
                     sb.Append(directive.Value.ToString());

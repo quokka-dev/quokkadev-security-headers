@@ -17,13 +17,14 @@ public class ApplicationBuilderExtensionsUnitTest
         var settings = ApplicationBuilderExtensions.GetSettingsFromDelegate(opts =>
         {
             opts.XFrameOption = XFrameOption.sameorigin;
-            opts.XContentTypeOptions = XContentTypeOptions.none;
+            opts.XContentTypeOptions = XContentTypeOptions.no_header;
             opts.XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.all;
             opts.ReferrerPolicy = ReferrerPolicy.strict_origin;
             opts.ClearSiteData = new ClearSiteData("*");
             opts.CrossOriginEmbedderPolicy = CrossOriginEmbedderPolicy.unsafe_none;
             opts.CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.unsafe_none;
             opts.CrossOriginResourcePolicy = CrossOriginResourcePolicy.cross_origin;
+            opts.ContentSecurityPolicyIgnoreUrls = new string[] { "index.html" };
         });
 
         // Act
@@ -51,13 +52,14 @@ public class ApplicationBuilderExtensionsUnitTest
         var inMemoryConfiguration = new Dictionary<string, string>
         {
             {"SecurityHeaders:XFrameOption", "sameorigin"},
-            {"SecurityHeaders:XContentTypeOptions", "none"},
+            {"SecurityHeaders:XContentTypeOptions", "no_header"},
             {"SecurityHeaders:XPermittedCrossDomainPolicies", "all"},
             {"SecurityHeaders:ReferrerPolicy", "strict_origin"},
             {"SecurityHeaders:ClearSiteData:0", "*"},
             {"SecurityHeaders:CrossOriginEmbedderPolicy", "unsafe_none"},
             {"SecurityHeaders:CrossOriginOpenerPolicy", "unsafe_none"},
-            {"SecurityHeaders:CrossOriginResourcePolicy", "cross_origin"}
+            {"SecurityHeaders:CrossOriginResourcePolicy", "cross_origin"},
+            { "SecurityHeaders:ContentSecurityPolicyIgnoreUrls:0","index.html" }
         };
 
         ConfigurationBuilder builder = new();
@@ -102,13 +104,16 @@ public class ApplicationBuilderExtensionsUnitTest
     {
         settings.Should().NotBeNull("settings must be initialized");
         settings.XFrameOption.Should().Be(XFrameOption.sameorigin, "XFrameOption passed value should be used");
-        settings.XContentTypeOptions.Should().Be(XContentTypeOptions.none, "XContentTypeOptions passed value should be used");
+        settings.XContentTypeOptions.Should().Be(XContentTypeOptions.no_header, "XContentTypeOptions passed value should be used");
         settings.XPermittedCrossDomainPolicies.Should().Be(XPermittedCrossDomainPolicies.all, "XPermittedCrossDomainPolicies passed value should be used");
         settings.ReferrerPolicy.Should().Be(ReferrerPolicy.strict_origin, "ReferrerPolicy passed value should be used");
         settings.ClearSiteData?.ToString().Should().Be("\"*\"", "ReferrerPolicy passed value should be used");
         settings.CrossOriginEmbedderPolicy.Should().Be(CrossOriginEmbedderPolicy.unsafe_none, "CrossOriginEmbedderPolicy passed value should be used");
         settings.CrossOriginOpenerPolicy.Should().Be(CrossOriginOpenerPolicy.unsafe_none, "CrossOriginOpenerPolicy passed value should be used");
         settings.CrossOriginResourcePolicy.Should().Be(CrossOriginResourcePolicy.cross_origin, "CrossOriginResourcePolicy passed value should be used");
+        settings.ContentSecurityPolicyIgnoreUrls.Should().NotBeNull();
+        settings.ContentSecurityPolicyIgnoreUrls.Should().HaveCount(1);
+        settings.ContentSecurityPolicyIgnoreUrls.Should().Contain("index.html");
     }
 
     private static void AssertDefaultApplied(SecurityHeadersConfigurationSettings settings)
@@ -122,6 +127,8 @@ public class ApplicationBuilderExtensionsUnitTest
         settings.CrossOriginEmbedderPolicy.Should().Be(CrossOriginEmbedderPolicy.require_corp, "CrossOriginEmbedderPolicy default value should be used");
         settings.CrossOriginOpenerPolicy.Should().Be(CrossOriginOpenerPolicy.same_origin, "CrossOriginOpenerPolicy default value should be used");
         settings.CrossOriginResourcePolicy.Should().Be(CrossOriginResourcePolicy.same_origin, "CrossOriginResourcePolicy default value should be used");
+        settings.ContentSecurityPolicyIgnoreUrls.Should().NotBeNull();
+        settings.ContentSecurityPolicyIgnoreUrls.Should().HaveCount(0);
     }
 
     [Fact(DisplayName = "AddNonceService_Register_Service")]
