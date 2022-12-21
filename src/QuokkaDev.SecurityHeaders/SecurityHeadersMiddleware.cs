@@ -42,11 +42,13 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddXFrameOption(HttpContext httpContext)
         {
-            if (settings.XFrameOption != XFrameOption.none)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (settings.XFrameOption != XFrameOption.no_header && settings.XFrameOption != XFrameOption.none)
             {
                 logger?.LogTrace("Adding XFrameOption header with value {header}", settings.XFrameOption);
                 httpContext.Response.Headers.TryAdd(Constants.Headers.X_FRAME_OPTIONS, settings.XFrameOption.ToString());
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddXContentTypeOptions(HttpContext httpContext)
@@ -94,10 +96,12 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddReferrerPolicy(HttpContext httpContext)
         {
-            if (settings.ReferrerPolicy != ReferrerPolicy.none)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (settings.ReferrerPolicy != ReferrerPolicy.no_header && settings.ReferrerPolicy != ReferrerPolicy.none)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.REFERRER_POLICY, settings.ReferrerPolicy.DashReplace());
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddClearSiteData(HttpContext httpContext)
@@ -110,26 +114,32 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddCrossOriginEmbedderPolicy(HttpContext httpContext)
         {
-            if (settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.none)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.no_header && settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.none)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_EMBEDDER_POLICY, settings.CrossOriginEmbedderPolicy.DashReplace());
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddCrossOriginOpenerPolicy(HttpContext httpContext)
         {
-            if (settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.none)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.no_header && settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.none)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_OPENER_POLICY, settings.CrossOriginOpenerPolicy.DashReplace());
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddCrossOriginResourcePolicy(HttpContext httpContext)
         {
-            if (settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.none)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.no_header && settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.none)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, settings.CrossOriginResourcePolicy.DashReplace());
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private string GetSafePath(HttpContext httpContext)

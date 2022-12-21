@@ -17,7 +17,7 @@ public class ApplicationBuilderExtensionsUnitTest
         var settings = ApplicationBuilderExtensions.GetSettingsFromDelegate(opts =>
         {
             opts.XFrameOption = XFrameOption.sameorigin;
-            opts.XContentTypeOptions = XContentTypeOptions.none;
+            opts.XContentTypeOptions = XContentTypeOptions.no_header;
             opts.XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.all;
             opts.ReferrerPolicy = ReferrerPolicy.strict_origin;
             opts.ClearSiteData = new ClearSiteData("*");
@@ -52,7 +52,7 @@ public class ApplicationBuilderExtensionsUnitTest
         var inMemoryConfiguration = new Dictionary<string, string>
         {
             {"SecurityHeaders:XFrameOption", "sameorigin"},
-            {"SecurityHeaders:XContentTypeOptions", "none"},
+            {"SecurityHeaders:XContentTypeOptions", "no_header"},
             {"SecurityHeaders:XPermittedCrossDomainPolicies", "all"},
             {"SecurityHeaders:ReferrerPolicy", "strict_origin"},
             {"SecurityHeaders:ClearSiteData:0", "*"},
@@ -104,7 +104,7 @@ public class ApplicationBuilderExtensionsUnitTest
     {
         settings.Should().NotBeNull("settings must be initialized");
         settings.XFrameOption.Should().Be(XFrameOption.sameorigin, "XFrameOption passed value should be used");
-        settings.XContentTypeOptions.Should().Be(XContentTypeOptions.none, "XContentTypeOptions passed value should be used");
+        settings.XContentTypeOptions.Should().Be(XContentTypeOptions.no_header, "XContentTypeOptions passed value should be used");
         settings.XPermittedCrossDomainPolicies.Should().Be(XPermittedCrossDomainPolicies.all, "XPermittedCrossDomainPolicies passed value should be used");
         settings.ReferrerPolicy.Should().Be(ReferrerPolicy.strict_origin, "ReferrerPolicy passed value should be used");
         settings.ClearSiteData?.ToString().Should().Be("\"*\"", "ReferrerPolicy passed value should be used");
