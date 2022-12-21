@@ -24,6 +24,7 @@ public class ApplicationBuilderExtensionsUnitTest
             opts.CrossOriginEmbedderPolicy = CrossOriginEmbedderPolicy.unsafe_none;
             opts.CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.unsafe_none;
             opts.CrossOriginResourcePolicy = CrossOriginResourcePolicy.cross_origin;
+            opts.ContentSecurityPolicyIgnoreUrls = new string[] { "index.html" };
         });
 
         // Act
@@ -57,7 +58,8 @@ public class ApplicationBuilderExtensionsUnitTest
             {"SecurityHeaders:ClearSiteData:0", "*"},
             {"SecurityHeaders:CrossOriginEmbedderPolicy", "unsafe_none"},
             {"SecurityHeaders:CrossOriginOpenerPolicy", "unsafe_none"},
-            {"SecurityHeaders:CrossOriginResourcePolicy", "cross_origin"}
+            {"SecurityHeaders:CrossOriginResourcePolicy", "cross_origin"},
+            { "SecurityHeaders:ContentSecurityPolicyIgnoreUrls:0","index.html" }
         };
 
         ConfigurationBuilder builder = new();
@@ -109,6 +111,9 @@ public class ApplicationBuilderExtensionsUnitTest
         settings.CrossOriginEmbedderPolicy.Should().Be(CrossOriginEmbedderPolicy.unsafe_none, "CrossOriginEmbedderPolicy passed value should be used");
         settings.CrossOriginOpenerPolicy.Should().Be(CrossOriginOpenerPolicy.unsafe_none, "CrossOriginOpenerPolicy passed value should be used");
         settings.CrossOriginResourcePolicy.Should().Be(CrossOriginResourcePolicy.cross_origin, "CrossOriginResourcePolicy passed value should be used");
+        settings.ContentSecurityPolicyIgnoreUrls.Should().NotBeNull();
+        settings.ContentSecurityPolicyIgnoreUrls.Should().HaveCount(1);
+        settings.ContentSecurityPolicyIgnoreUrls.Should().Contain("index.html");
     }
 
     private static void AssertDefaultApplied(SecurityHeadersConfigurationSettings settings)
@@ -122,6 +127,8 @@ public class ApplicationBuilderExtensionsUnitTest
         settings.CrossOriginEmbedderPolicy.Should().Be(CrossOriginEmbedderPolicy.require_corp, "CrossOriginEmbedderPolicy default value should be used");
         settings.CrossOriginOpenerPolicy.Should().Be(CrossOriginOpenerPolicy.same_origin, "CrossOriginOpenerPolicy default value should be used");
         settings.CrossOriginResourcePolicy.Should().Be(CrossOriginResourcePolicy.same_origin, "CrossOriginResourcePolicy default value should be used");
+        settings.ContentSecurityPolicyIgnoreUrls.Should().NotBeNull();
+        settings.ContentSecurityPolicyIgnoreUrls.Should().HaveCount(0);
     }
 
     [Fact(DisplayName = "AddNonceService_Register_Service")]

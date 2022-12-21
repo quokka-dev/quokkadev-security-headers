@@ -140,5 +140,40 @@ namespace QuokkaDev.SecurityHeaders.Tests
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Once);
             ns.Verify(s => s.RequestNonce, Times.Once);
         }
+
+        [Fact(DisplayName = "CSP ignore urls should be honored")]
+        public async Task CSP_Ignore_Urls_Should_Be_Honored()
+        {
+            // Arrange
+            var delegateMock = new Mock<RequestDelegate>();
+            delegateMock.Setup(m => m.Invoke(It.IsAny<HttpContext>())).Returns(Task.CompletedTask);
+
+            var settings = new SecurityHeadersConfigurationSettings()
+            {
+                UseContentSecurityPolicy = true,
+                ContentSecurityPolicyIgnoreUrls = new string[] { "/swagger/index.html" },
+                ContentSecurityPolicy = ContentSecurityPolicyBuilder.New()
+                    .AddDefaultSrc(d => d.Nonce())
+                    .Build()
+            };
+
+            var context = new HttpContextMock();
+            IHeaderDictionary headerDictionary = new HeaderDictionary();
+            context.ResponseMock.Mock.Setup(r => r.Headers).Returns(headerDictionary);
+
+            context.RequestMock.Mock.Setup(r => r.Path).Returns("/swagger/index.html");
+
+            var ns = new Mock<INonceService>();
+            ns.Setup(s => s.RequestNonce).Returns("mock-nonce");
+            context.RequestServicesMock.Mock.Setup(rs => rs.GetService(typeof(INonceService))).Returns(ns.Object);
+            SecurityHeadersMiddleware middleware = new(delegateMock.Object, settings, null);
+
+            // Act
+            await middleware.InvokeAsync(context);
+
+            // Assert            
+            context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Never);
+            ns.Verify(s => s.RequestNonce, Times.Never);
+        }
     }
 }
