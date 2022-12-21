@@ -76,15 +76,15 @@ namespace QuokkaDev.SecurityHeaders.Tests
 
             var settings = new SecurityHeadersConfigurationSettings()
             {
-                XFrameOption = XFrameOption.none,
-                XContentTypeOptions = XContentTypeOptions.none,
+                XFrameOption = XFrameOption.no_header,
+                XContentTypeOptions = XContentTypeOptions.no_header,
                 UseContentSecurityPolicy = false,
                 UsePermissionPolicy = false,
                 XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.no_header,
-                ReferrerPolicy = ReferrerPolicy.none,
-                CrossOriginEmbedderPolicy = CrossOriginEmbedderPolicy.none,
-                CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.none,
-                CrossOriginResourcePolicy = CrossOriginResourcePolicy.none,
+                ReferrerPolicy = ReferrerPolicy.no_header,
+                CrossOriginEmbedderPolicy = CrossOriginEmbedderPolicy.no_header,
+                CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.no_header,
+                CrossOriginResourcePolicy = CrossOriginResourcePolicy.no_header,
                 ClearSiteData = null
             };
 
