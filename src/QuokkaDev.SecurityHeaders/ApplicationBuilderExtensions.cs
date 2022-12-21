@@ -102,6 +102,7 @@ namespace QuokkaDev.SecurityHeaders
                 XFrameOption = XFrameOption.deny,
                 XContentTypeOptions = XContentTypeOptions.nosniff,
                 UseContentSecurityPolicy = true,
+                ContentSecurityPolicyIgnoreUrls = Array.Empty<string>(),
                 UsePermissionPolicy = true,
                 UseClearSiteData = true,
                 XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.none,
