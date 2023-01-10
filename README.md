@@ -75,7 +75,8 @@ app.UseSecurityHeaders(this.Configuration, "CustomSectionName", settings =>
 ### [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
 
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   deny (default value)
 -   sameorigin
 
@@ -96,7 +97,8 @@ app.UseSecurityHeaders(settings =>
 
 ### [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   nosniff (default value)
 
 ```csharp
@@ -140,7 +142,8 @@ app.UseSecurityHeaders(settings =>
 
 ### [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   no_referrer (default value)
 -   no_referrer_when_downgrade
 -   origin
@@ -168,7 +171,8 @@ app.UseSecurityHeaders(settings =>
 
 ### [Cross-Origin-Embedder-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy)
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   unsafe_none
 -   require_corp (default value)
 
@@ -189,7 +193,8 @@ app.UseSecurityHeaders(settings =>
 
 ### [Cross-Origin-Opener-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   unsafe_none
 -   same_origin_allow_popups
 -   same_origin (default value)
@@ -211,7 +216,8 @@ app.UseSecurityHeaders(settings =>
 
 ### [Cross-Origin-Resource-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy)
 Admitted values:
--   none (don't use header)
+-   no_header (don't use header)
+-   none (don't use header, deprecated)
 -   same_site
 -   same_origin (default value)
 -   cross_origin
