@@ -325,7 +325,7 @@ Configure a directive calling the right method on the builder then adding all th
 If a directive take no extra values (like *block-all-mixed-content*) pass an array with an empty string in configuration file.
 
 #### Ignore Urls
-In some cases it can be useful disable the Content Security Policy for some URLs in your application. For example, if you use  NuGet package it serve an index.html page with inline styles and scripts. You can bypass the problem using 'unsafe-inline' as a CSP value for styles and script but this makes the whole application much more insecure. You can disable CSP for the swagger endpoint using the property `ContentSecurityPolicyIgnoreUrls` and passing an array of path to ignore:
+In some cases it can be useful disable the Content Security Policy for some URLs in your application. For example, if you use Swashbuckle.AspNetCore NuGet package it serve an index.html page with inline styles and scripts. You can bypass the problem using 'unsafe-inline' as a CSP value for styles and script but this makes the whole application much more insecure. You can disable CSP for the swagger endpoint using the property `ContentSecurityPolicyIgnoreUrls` and passing an array of path to ignore:
 
 ```csharp
 app.UseSecurityHeaders(settings =>
