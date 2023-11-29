@@ -55,6 +55,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
             await middleware.InvokeAsync(context);
 
             // Assert
+#pragma warning disable ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.X_FRAME_OPTIONS, nameof(XFrameOption.sameorigin)), Times.Once);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.X_CONTENT_TYPE_OPTIONS, nameof(XContentTypeOptions.nosniff)), Times.Once);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Once);
@@ -65,6 +66,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CROSS_ORIGIN_OPENER_POLICY, CrossOriginOpenerPolicy.same_origin.DashReplace()), Times.Once);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, CrossOriginResourcePolicy.same_origin.DashReplace()), Times.Once);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.PERMISSION_POLICY, It.IsAny<StringValues>()), Times.Once);
+#pragma warning restore ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
         }
 
         [Fact(DisplayName = "No headers should be honored")]
@@ -97,6 +99,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
             await middleware.InvokeAsync(context);
 
             // Assert
+#pragma warning disable ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.X_FRAME_OPTIONS, It.IsAny<StringValues>()), Times.Never);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.X_CONTENT_TYPE_OPTIONS, It.IsAny<StringValues>()), Times.Never);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Never);
@@ -107,6 +110,7 @@ namespace QuokkaDev.SecurityHeaders.Tests
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CROSS_ORIGIN_OPENER_POLICY, It.IsAny<StringValues>()), Times.Never);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, It.IsAny<StringValues>()), Times.Never);
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.PERMISSION_POLICY, It.IsAny<StringValues>()), Times.Never);
+#pragma warning restore ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
         }
 
         [Fact(DisplayName = "Nonce service should be called")]
@@ -137,7 +141,9 @@ namespace QuokkaDev.SecurityHeaders.Tests
             await middleware.InvokeAsync(context);
 
             // Assert            
+#pragma warning disable ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Once);
+#pragma warning restore ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             ns.Verify(s => s.RequestNonce, Times.Once);
         }
 
@@ -172,7 +178,9 @@ namespace QuokkaDev.SecurityHeaders.Tests
             await middleware.InvokeAsync(context);
 
             // Assert            
+#pragma warning disable ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             context.ResponseMock.HeadersMock.Mock.Verify(d => d.Add(Constants.Headers.CONTENT_SECURITY_POLICY, It.IsAny<StringValues>()), Times.Never);
+#pragma warning restore ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
             ns.Verify(s => s.RequestNonce, Times.Never);
         }
     }

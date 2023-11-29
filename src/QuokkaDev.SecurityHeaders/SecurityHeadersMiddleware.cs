@@ -42,13 +42,11 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddXFrameOption(HttpContext httpContext)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (settings.XFrameOption != XFrameOption.no_header && settings.XFrameOption != XFrameOption.none)
+            if (settings.XFrameOption != XFrameOption.no_header)
             {
                 logger?.LogTrace("Adding XFrameOption header with value {header}", settings.XFrameOption);
                 httpContext.Response.Headers.TryAdd(Constants.Headers.X_FRAME_OPTIONS, settings.XFrameOption.ToString());
             }
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddXContentTypeOptions(HttpContext httpContext)
@@ -62,7 +60,8 @@ namespace QuokkaDev.SecurityHeaders
         private void AddContentSecurityPolicy(HttpContext httpContext)
         {
             if (settings.ContentSecurityPolicyIgnoreUrls?.Length > 0 &&
-                settings.ContentSecurityPolicyIgnoreUrls.Any(url => GetSafePath(httpContext).Contains(url, StringComparison.InvariantCultureIgnoreCase)))
+                Array.Exists(settings.ContentSecurityPolicyIgnoreUrls, url => GetSafePath(httpContext).Contains(url, StringComparison.InvariantCultureIgnoreCase))
+            )
             {
                 return;
             }
@@ -96,12 +95,10 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddReferrerPolicy(HttpContext httpContext)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (settings.ReferrerPolicy != ReferrerPolicy.no_header && settings.ReferrerPolicy != ReferrerPolicy.none)
+            if (settings.ReferrerPolicy != ReferrerPolicy.no_header)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.REFERRER_POLICY, settings.ReferrerPolicy.DashReplace());
             }
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddClearSiteData(HttpContext httpContext)
@@ -114,32 +111,26 @@ namespace QuokkaDev.SecurityHeaders
 
         private void AddCrossOriginEmbedderPolicy(HttpContext httpContext)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.no_header && settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.none)
+            if (settings.CrossOriginEmbedderPolicy != CrossOriginEmbedderPolicy.no_header)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_EMBEDDER_POLICY, settings.CrossOriginEmbedderPolicy.DashReplace());
             }
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddCrossOriginOpenerPolicy(HttpContext httpContext)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.no_header && settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.none)
+            if (settings.CrossOriginOpenerPolicy != CrossOriginOpenerPolicy.no_header)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_OPENER_POLICY, settings.CrossOriginOpenerPolicy.DashReplace());
             }
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void AddCrossOriginResourcePolicy(HttpContext httpContext)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            if (settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.no_header && settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.none)
+            if (settings.CrossOriginResourcePolicy != CrossOriginResourcePolicy.no_header)
             {
                 httpContext.Response.Headers.TryAdd(Constants.Headers.CROSS_ORIGIN_RESOURCE_POLICY, settings.CrossOriginResourcePolicy.DashReplace());
             }
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private static string GetSafePath(HttpContext httpContext)

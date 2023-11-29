@@ -21,17 +21,13 @@
     {
         no_header,
         deny,
-        sameorigin,
-        [Obsolete("Use no_header")]
-        none
+        sameorigin
     }
 
     public enum XContentTypeOptions
     {
         no_header,
-        nosniff,
-        [Obsolete("Use no_header")]
-        none
+        nosniff
     }
 
     public enum XPermittedCrossDomainPolicies
@@ -54,18 +50,14 @@
         same_origin,
         strict_origin,
         strict_origin_when_cross_origin,
-        unsafe_url,
-        [Obsolete("Use no_header")]
-        none
+        unsafe_url
     }
 
     public enum CrossOriginEmbedderPolicy
     {
         no_header,
         unsafe_none,
-        require_corp,
-        [Obsolete("Use no_header")]
-        none
+        require_corp
     }
 
     public enum CrossOriginOpenerPolicy
@@ -73,9 +65,7 @@
         no_header,
         unsafe_none,
         same_origin_allow_popups,
-        same_origin,
-        [Obsolete("Use no_header")]
-        none
+        same_origin
     }
 
     public enum CrossOriginResourcePolicy
@@ -83,8 +73,6 @@
         no_header,
         same_site,
         same_origin,
-        cross_origin,
-        [Obsolete("Use no_header")]
-        none
+        cross_origin
     }
 }

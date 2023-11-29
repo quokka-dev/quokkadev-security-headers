@@ -33,7 +33,7 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
             {
                 foreach (string key in keys.Select(k => k.Key))
                 {
-                    var allowedSources = config.GetSection(sectionName).GetSection(key).Get<string[]>().ToList();
+                    var allowedSources = config.GetSection(sectionName).GetSection(key).Get<string[]>()?.ToList();
                     AddDirective(key, allowedSources);
                 }
             }
@@ -45,12 +45,9 @@ namespace QuokkaDev.SecurityHeaders.PermissionPolicy
             return AddDirective(name, p =>
             {
                 allowedSources ??= new List<string>();
-                if (allowedSources != null)
+                foreach (string source in allowedSources)
                 {
-                    foreach (string source in allowedSources)
-                    {
-                        p.AddSource(source);
-                    }
+                    p.AddSource(source);
                 }
             });
         }
